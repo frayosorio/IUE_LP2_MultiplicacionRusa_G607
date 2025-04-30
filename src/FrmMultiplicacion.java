@@ -56,9 +56,36 @@ public class FrmMultiplicacion extends JFrame {
     }
 
     private void calcular() {
+        int numero1 = Integer.parseInt(txtNumero1.getText());
+        int numero2 = Integer.parseInt(txtNumero2.getText());
 
+        int _numero1 = numero1;
+        int _numero2 = numero2;
+        // version iterativa
+        int producto = 0;
+        while (numero1 >= 1) {
+            if (numero1 % 2 == 1) {
+                producto += numero2;
+            }
+            numero1 /= 2;
+            numero2 *= 2;
+        }
+        txtResultado.setText(String.valueOf(producto));
+
+        // version recursiva
+        txtResultadoR.setText(String.valueOf(multiplicacionRusa(_numero1, _numero2)));
     }
 
-
+    private int multiplicacionRusa(int n1, int n2) {
+        if (n1 <= 1) {
+            return n1 == 0 ? 0 : n2;
+        } else {
+            if (n1 % 2 == 0) {
+                return multiplicacionRusa(n1 / 2, n2 * 2);
+            } else {
+                return n2 + multiplicacionRusa(n1 / 2, n2 * 2);
+            }
+        }
+    }
 
 }
